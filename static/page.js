@@ -37,7 +37,7 @@ module.exports = function (req, res, url) {
 				flashvars: {
 					'apiserver': '/', 'storePath': process.env.STORE_URL + '/<store>',
 					'clientThemePath': process.env.CLIENT_URL + '/<client_theme>', 'original_asset_id': query['id'] || null,
-					'themeId': 'business', 'ut': 60, 'bs': 'default', 'appCode': 'go', 'page': '', 'siteId': 'go',
+					'themeId': 'family', 'ut': 60, 'bs': 'adam', 'appCode': 'go', 'page': '', 'siteId': 'go',
 					'm_mode': 'school', 'isLogin': 'Y', 'isEmbed': 1, 'ctc': 'go', 'tlang': 'en_US',
 				},
 				allowScriptAccess: 'always',
@@ -135,10 +135,6 @@ module.exports = function (req, res, url) {
 				function hideHeader() {
 					document.getElementById("header").style.display = "none";
 				}
-			} else if(window.location.pathname == '/go_full') {
-				function hideHeader() {
-					document.getElementById("header").style.display = "none";
-				}
 			}
 		</script>
 		<link rel="stylesheet" type="text/css" href="/pages/css/modern-normalize.css">
@@ -151,9 +147,17 @@ module.exports = function (req, res, url) {
 	</head>
 	
 	<header id="header">
-		<a href="/"><h1 style="margin:0"><img id="logo" src="/pages/img/list_logo.png" alt="Wrapper: Offline"/></h1>
+		<a href="/">
+			<h1 style="margin:0"><img id="logo" src="/pages/img/list_logo.svg" alt="Wrapper: Offline"/></h1>
+		</a>
 		<nav id="headbuttons">
-			<a class="button_small" onclick="document.getElementById('file').click()">UPLOAD A MOVIE</a>
+			<div class="dropdown_contain button_small">
+				<div class="dropdown_button upload_button">UPLOAD</div>
+				<nav class="dropdown_menu">
+					<a onclick="document.getElementById('file').click()">Movie</a>
+					<a onclick="document.getElementById('file2').click()">Character</a>
+				</nav>
+			</div>	
 			<div class="dropdown_contain button_small">
 				<div class="dropdown_button">CREATE A CHARACTER</div>
 				<nav class="dropdown_menu">
@@ -162,13 +166,13 @@ module.exports = function (req, res, url) {
 					<a href="/cc?themeId=family&bs=eve">Girl (Eve)</a>
 					<a href="/cc?themeId=family&bs=bob">Fat (Bob)</a>
 					<a href="/cc?themeId=family&bs=rocky">Buff (Rocky)</a>
-					<hr>
+					<hr />
 					<h2>Anime</h2>
 					<a href="/cc?themeId=anime&bs=guy">Guy</a>
 					<a href="/cc?themeId=anime&bs=girl">Girl</a>
 					<a href="/cc?themeId=ninjaanime&bs=guy">Guy (Ninja)</a>
 					<a href="/cc?themeId=ninjaanime&bs=girl">Girl (Ninja)</a>
-					<hr>
+					<hr />
 					<h2>Peepz</h2>
 					<a href="/cc?themeId=cc2&bs=default">Lil Peepz</a>
 					<a href="/cc?themeId=chibi&bs=default">Chibi Peepz</a>
@@ -178,9 +182,14 @@ module.exports = function (req, res, url) {
 			<div class="dropdown_contain button_small">
 				<div class="dropdown_button">BROWSE CHARACTERS</div>
 				<nav class="dropdown_menu">
+					<h2>Comedy World</h2>
 					<a href="/cc_browser?themeId=family">Comedy World</a>
+					<hr />
+					<h2>Anime</h2>
 					<a href="/cc_browser?themeId=anime">Anime</a>
 					<a href="/cc_browser?themeId=ninjaanime">Ninja Anime</a>
+					<hr />
+					<h2>Peepz</h2>
 					<a href="/cc_browser?themeId=cc2">Lil' Peepz</a>
 					<a href="/cc_browser?themeId=chibi">Chibi Peepz</a>
 					<a href="/cc_browser?themeId=ninja">Chibi Ninjas</a>

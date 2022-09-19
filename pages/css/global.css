@@ -5,15 +5,16 @@ this css has the general header/footer layout stuff
 /**
 general
 **/
-html,body{
+html, body {
 	background: #fff;
 	color: #474747;
 	font: 16px/1.5 'Sailec', Arial, sans-serif;
-	width:100%;height:100%;
+	width: 100%;
+	height: 100%;
 }
 body {
 	display: flex; 
-  flex-direction: column; 
+	flex-direction: column; 
 }
 
 
@@ -25,12 +26,18 @@ header {
 	background: #1e1e1e;
 	color: #fff;
 	text-align: center;
-	/* layout */
-	height: 44px;
+	padding-bottom: 13px;
 	padding: 0 15px;
 	display: flex;
 	justify-content: space-between;
-	flex-shrink: 0; /* prevents the header from shrinking */
+	flex-shrink: 0;
+}
+/* makes the header a set height when the window is 887px wide */
+@media (min-width: 887px) {
+	header {
+		padding-bottom: auto;
+		height: 44px;
+	}
 }
 #logo {
 	margin-top: 4px;
@@ -72,6 +79,7 @@ header dropdowns
 /* change button margin/padding to fit dropdown */
 .dropdown_contain { padding: 0; margin: 6px 5px; }
 .dropdown_button { margin: 0; padding: 5px 10px; }
+.upload_button { margin: 0; padding: 5px 25px; }
 /* make dropdown appear on hover */
 .dropdown_contain:hover>nav {
 	display: block;
@@ -124,14 +132,12 @@ header dropdowns
 /**
 footer
 **/
-footer {
-	/* style */
+footer{
 	background: #1e1e1e;
-	/* layout */
 	margin-top: auto; /* footer at the foot */
 	display: flex;
 	justify-content: space-between;
-	flex-shrink: 0; /* prevents the footer from shrinking */
+	flex-shrink: 0;
 }
 footer nav { margin:5px 10px}
 /* links */

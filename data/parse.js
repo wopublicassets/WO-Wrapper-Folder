@@ -236,31 +236,39 @@ module.exports = {
 					break;
 				}
 
-				case 'scene': {
-					for (const pK in element.children) {
+				case "scene": {
+					for (var pK in element.children) {
 						var piece = element.children[pK];
-						switch (piece.name) {
-							case 'durationSetting':
-							case 'trans':
-								break;
-							case 'bg':
-							case 'effect':
-							case 'prop': {
-								var val = piece.childNamed('file').val;
-								var pieces = val.split('.');
+						var tag = piece.name;
+						if (tag == "effectAsset") {
+							tag = "effect";
+						}
 
-								if (pieces[0] == 'ugc') {
+						switch (tag) {
+							case "durationSetting":
+							case "trans":
+								break;
+							case "bg":
+							case "effect":
+							case "prop": {
+								var file = piece.childNamed("file");
+								if (!file) continue;
+								var val = file.val;
+								var pieces = val.split(".");
+
+								if (pieces[0] == "ugc") {
 									// TODO: Make custom props load.
-								}
-								else {
-									const ext = pieces.pop();
-									pieces.splice(1, 0, piece.name);
+								} else {
+									var ext = pieces.pop();
+									pieces.splice(1, 0, tag);
 									pieces[pieces.length - 1] += `.${ext}`;
 
-									const name = pieces.join('.');
-									const buff = await get(`${store}/${pieces.join('/')}`);
-									fUtil.addToZip(zip, name, buff);
-									themes[pieces[0]] = true;
+									var fileName = pieces.join(".");
+									if (!zip[fileName]) {
+										var buff = await get(`${store}/${pieces.join("/")}`);
+										fUtil.addToZip(zip, fileName, buff);
+										themes[pieces[0]] = true;
+									}
 								}
 								break;
 							}
@@ -460,5 +468,8 @@ module.exports = {
 			fs.writeFileSync(fUtil.getFileIndex('thumb-', '.png', id), sub);
 		}
 		fs.writeFileSync(fUtil.getFileIndex('movie-', '.xml', id), xml);
+	},
+	async unpackCharXml(xml, id) {
+		fs.writeFileSync(fUtil.getFileIndex('char-', '.xml', id), xml);
 	},
 }
